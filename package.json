@@ -1,0 +1,15 @@
+{
+  "name": "conrad-nodejs",
+  "version": "1.0.0",
+  "description": "My Nodejs App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Conrad Jacobs",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mocha": "^10.2.0"
+  }
+}
