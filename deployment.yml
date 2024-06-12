@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nodejs-container
-          image: $CONTAINER_IMAGE
+          image: CONTAINER_IMAGE
           ports:
             - containerPort: 3000
 
