@@ -18,8 +18,8 @@ phases:
     commands:
     - echo Build completed on `date`
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
-    #- cp $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH >> https://github.com/reeple/devops/blob/d32ae84d53099667c6a6e709c986b4d43af865f4/k8s/$ENV.yaml
-    - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' https://github.com/ccjacobs14/helm-project/blob/bdc8c2ffd40e1fde07a6c3620207abd4b43a5c41/myawesomeapp14/prod-values.yaml
+    - cp 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH >> https://github.com/ccjacobs14/helm-project/blob/bdc8c2ffd40e1fde07a6c3620207abd4b43a5c41/myawesomeapp14/prod-values.yaml
+    #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' https://github.com/ccjacobs14/helm-project/blob/bdc8c2ffd40e1fde07a6c3620207abd4b43a5c41/myawesomeapp14/prod-values.yaml
 
     #- printf '[{"name":"pipeline name","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH > imagedefinitions.json
   #artifacts:
