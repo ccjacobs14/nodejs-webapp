@@ -12,7 +12,7 @@ phases:
   build:
     commands:
     - echo Build started on `date`
-    - echo Building your Docker image...
+    - echo Building the Docker image...
     - docker build -t 698276559677/nodejs-webapp:latest .
     #- docker build -t $ECR_REGISTRY:$COMMIT_HASH .
     - docker tag 698276559677/nodejs-webapp:latest $REPOSITORY_URI:$COMMIT_HASH
