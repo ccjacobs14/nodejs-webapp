@@ -1,0 +1,6 @@
+name: Push ECR Image
+on:
+  push:
+    branches: ["main"]
+env:
+  ECR_REGISTRY: 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp
