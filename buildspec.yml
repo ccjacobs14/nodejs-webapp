@@ -23,6 +23,6 @@ phases:
     - docker push $REPOSITORY_URI:$COMMIT_HASH
     #- cp 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH >> https://github.com/ccjacobs14/helm-project/blob/bdc8c2ffd40e1fde07a6c3620207abd4b43a5c41/myawesomeapp14/prod-values.yaml
     #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' https://github.com/ccjacobs14/helm-project/blob/main/myawesomeapp14/prod-values.yaml
-    #- printf '[{"name":"pipeline name","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH > imagedefinition.json
+    #- printf '[{"name":"pipeline name","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH > imagedefinitionss.json
   #artifacts:
-    #files: imagedefinition.json
+    #files: imagedefinitions.json
