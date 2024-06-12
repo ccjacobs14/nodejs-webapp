@@ -6,7 +6,7 @@ phases:
     #- aws codeartifact login --tool npm --repository reeple --domain reeple --domain-owner $AWS_ACCOUNT_ID --region $AWS_DEFAULT_REGION
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 698276559677.dkr.ecr.us-east-1.amazonaws.com
     - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-    - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' ../helm-project/myawesomeapp14/prod-values.yaml
+    - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' deployment.yml
     
   build:
     commands:
