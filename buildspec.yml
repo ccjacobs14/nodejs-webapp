@@ -13,13 +13,14 @@ phases:
     commands:
     - echo Build started on `date`
     - echo Building the Docker image...
-    - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest .
-    - docker tag $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH
+    - docker build -t 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:latest .
+    - docker tag 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:latest 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
 
   post_build:
     commands:
     - echo Build completed on `date`
-    - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH
+    - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
+
     #- cp $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH >> https://github.com/reeple/devops/blob/d32ae84d53099667c6a6e709c986b4d43af865f4/k8s/$ENV.yaml
     #- sed -i 's@CONTAINER_IMAGE@'"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH"'@' https://github.com/reeple/devops/blob/d32ae84d53099667c6a6e709c986b4d43af865f4/k8s/$ENV.yaml
 
