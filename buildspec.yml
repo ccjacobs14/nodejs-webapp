@@ -22,8 +22,6 @@ phases:
     - sed -i 's@CONTAINER_IMAGE@'"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH"'@' deployment.yml
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 698276559677.dkr.ecr.us-east-1.amazonaws.com
     #- aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
     - aws eks --region us-east-1 update-kubeconfig --name eks_cluster
     
   build:
@@ -37,6 +35,8 @@ phases:
     commands:
     - echo Build completed on `date`
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
     - kubectl apply -f deployment.yml
 
     #- cp $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH >> https://github.com/reeple/devops/blob/d32ae84d53099667c6a6e709c986b4d43af865f4/k8s/$ENV.yaml
