@@ -1,6 +1,6 @@
 version: 0.2
 phases:
-  Install:
+  install:
     commands:
     - curl -LO https://dl.k8s.io/release/v1.27.2/bin/linux/amd64/kubectl   
     - chmod +x ./kubectl
