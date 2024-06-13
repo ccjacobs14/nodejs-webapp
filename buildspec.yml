@@ -37,7 +37,7 @@ phases:
     - echo Build completed on `date`
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
     #- sed -i 's@CONTAINER_IMAGE@'"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH"'@' deployment.yml
-    - aws eks update-kubeconfig --region us-east-1 --name eks_cluster
+    #- aws eks update-kubeconfig --region us-east-1 --name eks_cluster
     - kubectl apply -f deployment.yml
     - printf '[{"name":"deployment.yml","imageUri":"%s"}]' 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH > build.json
 artifacts:
