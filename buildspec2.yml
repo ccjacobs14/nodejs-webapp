@@ -15,17 +15,17 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - REPO_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/IMAGE_REPO_NAME
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 698276559677.dkr.ecr.us-east-1.amazonaws.com
+      - REPO_URI=698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=latest
-      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME
+      - aws eks update-kubeconfig --name eks_cluster --region us-east-1 
   build:
     commands:
       - echo Build started on `date`
       - echo Building your Docker image...          
       - docker build -t $REPO_URI:$IMAGE_TAG .
-      - docker tag $REPO_URI:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH
+      - docker tag $REPO_URI:$IMAGE_TAG 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
  
 
       
@@ -33,6 +33,6 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH
+      - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
       - echo Push the latest image to cluster
       - kubectl apply -f deployment.yml
