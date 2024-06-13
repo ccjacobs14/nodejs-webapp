@@ -35,4 +35,4 @@ phases:
       - echo Pushing the Docker image...
       - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
       - echo Push the latest image to cluster
-      - kubectl apply -f deployment.yml
+      #- kubectl apply -f deployment.yml
