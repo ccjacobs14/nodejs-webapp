@@ -15,10 +15,10 @@ spec:
         app: nodejs-app
     spec:
       containers:
-        - name: nodejs-container
-          image: CONTAINER_IMAGE
-          ports:
-          - containerPort: 3000
+      - name: nodejs-container
+        image: CONTAINER_IMAGE
+        ports:
+        - containerPort: 3000
 
 ---
 
