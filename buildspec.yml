@@ -1,8 +1,8 @@
 version: 0.2
-env:
-  variables:
-    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+# env:
+#   variables:
+#     AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+#     AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
 phases:
   install:
     commands:
