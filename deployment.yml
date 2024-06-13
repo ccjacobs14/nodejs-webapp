@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nodejs-container
-          image: 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
+          image: CONTAINER_IMAGE
           ports:
             - containerPort: 3000
 
