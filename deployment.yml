@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: nodejs-app
-  spec:
+  #spec:
     containers:
       - name: nodejs-container
         image: CONTAINER_IMAGE
