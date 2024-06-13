@@ -13,6 +13,15 @@ phases:
     - source ~/.bashrc
     - echo 'Check kubectl version'
     - kubectl version --short --client
+    - echo Installing necessary library…
+    - apt-get update
+    - apt install -y awscli
+    - curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/aws-iam-authenticator
+    - chmod +x ./aws-iam-authenticator
+    - mkdir -p ~/bin && cp ./aws-iam-authenticator ~/bin/aws-iam-authenticator && export PATH=~/bin:$PATH
+    - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    - chmod 700 get_helm.sh
+    - ./get_helm.sh
     
   pre_build:
     commands:
@@ -22,7 +31,7 @@ phases:
     - sed -i 's@CONTAINER_IMAGE@'"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH"'@' deployment.yml
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 698276559677.dkr.ecr.us-east-1.amazonaws.com
     #- aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-    - aws eks --region us-east-1 update-kubeconfig --name eks_cluster
+    - aws eks update-kubeconfig --name eks_cluster --region us-east-1
     
   build:
     commands:
@@ -35,8 +44,8 @@ phases:
     commands:
     - echo Build completed on `date`
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
-    # - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-    # - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
     - aws eks --region us-east-1 update-kubeconfig --name eks_cluster
     - kubectl apply -f deployment.yml
 
