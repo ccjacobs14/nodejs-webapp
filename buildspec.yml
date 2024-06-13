@@ -13,7 +13,7 @@ phases:
     - chmod 700 get_helm.sh
     - ./get_helm.sh
     - echo "Update Image tag in kube-manifest..."
-    - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$COMMIT_HASH"'@' deployment.yml
+    - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' deployment.yml
     
   pre_build:
     commands:
@@ -39,6 +39,7 @@ phases:
     #- sed -i 's@CONTAINER_IMAGE@'"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH"'@' deployment.yml
     - aws eks update-kubeconfig --region us-east-1 --name eks_cluster
     - kubectl apply -f deployment.yml
-    - printf '[{"name":"deployment.yml","imageUri":"%s"}]' $REPOSITORY_URI:$COMMIT_HASH > build.json
+    - printf '[{"name":"deployment.yml","imageUri":"%s"}]' 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH > build.json
 artifacts:
-  files: build.json
+  files:
+    - build.json
