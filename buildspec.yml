@@ -17,6 +17,8 @@ phases:
   pre_build:
     commands:
     - echo Logging in...
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
     #- aws codeartifact login --tool npm --repository reeple --domain reeple --domain-owner $AWS_ACCOUNT_ID --region $AWS_DEFAULT_REGION
     - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
     - sed -i 's@CONTAINER_IMAGE@'"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH"'@' deployment.yml
