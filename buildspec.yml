@@ -40,5 +40,5 @@ phases:
     - aws eks -update-kubeconfig -region us-east-1 --name eks_cluster
     - kubectl apply -f deployment.yml
     - printf '[{"name":"deployment.yml","imageUri":"%s"}]' $REPOSITORY_URI:$COMMIT_HASH > build.json
-  artifacts:
-    files: build.json
+artifacts:
+  files: build.json
