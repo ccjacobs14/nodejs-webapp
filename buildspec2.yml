@@ -23,7 +23,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Building your Docker image...          
+      - echo Building the Docker image...          
       - docker build -t $REPO_URI:$IMAGE_TAG .
       - docker tag $REPO_URI:$IMAGE_TAG 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
  
