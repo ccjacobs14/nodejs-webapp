@@ -1,5 +1,15 @@
 version: 0.2
 phases:
+  Install:
+    commands:
+    - curl -LO https://dl.k8s.io/release/v1.27.2/bin/linux/amd64/kubectl   
+    - chmod +x ./kubectl
+    - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+    - echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+    - source ~/.bashrc
+    - echo 'Check kubectl version'
+    - kubectl version --short --client
+    
   pre_build:
     commands:
     - echo Logging in...
@@ -8,6 +18,7 @@ phases:
     - sed -i 's@CONTAINER_IMAGE@'"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH"'@' deployment.yml
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 698276559677.dkr.ecr.us-east-1.amazonaws.com
     #- aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+    - aws eks --region us-east-1 update-kubeconfig --name eks-cluster
     
   build:
     commands:
@@ -20,6 +31,7 @@ phases:
     commands:
     - echo Build completed on `date`
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
+    - kubectl apply -f deployment.yml
 
     #- cp $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH >> https://github.com/reeple/devops/blob/d32ae84d53099667c6a6e709c986b4d43af865f4/k8s/$ENV.yaml
     #- sed -i 's@CONTAINER_IMAGE@'"$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$COMMIT_HASH"'@' https://github.com/reeple/devops/blob/d32ae84d53099667c6a6e709c986b4d43af865f4/k8s/$ENV.yaml
