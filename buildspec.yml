@@ -32,10 +32,10 @@ phases:
     - echo Build completed on `date`
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
     #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' deployment.yml
-    - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' /helm-project/blob/main/myawesomeapp14/values.yaml
+    - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' /helm-project/myawesomeapp14/values.yaml
     #- kubectl apply -f deployment.yml
     #- helm install myawesomeapp14-r1 myawesomeapp14
-    - helm upgrade -i myawesomeapp14-r1 myawesomeapp14 -f /helm-project/blob/main/myawesomeapp14/values.yaml
+    - helm upgrade -i myawesomeapp14-r1 myawesomeapp14 -f /helm-project/myawesomeapp14/values.yaml
 #     - printf '[{"name":"deployment.yml","imageUri":"%s"}]' 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH > build.json
 # artifacts:
 #   files:
