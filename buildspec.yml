@@ -33,7 +33,7 @@ phases:
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
     - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' deployment.yml
     - kubectl apply -f deployment.yml
-    - printf '[{"name":"deployment.yml","imageUri":"%s"}]' 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH > build.json
-artifacts:
-  files:
-    - build.json
+#     - printf '[{"name":"deployment.yml","imageUri":"%s"}]' 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH > build.json
+# artifacts:
+#   files:
+#     - build.json
