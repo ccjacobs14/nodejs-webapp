@@ -13,12 +13,12 @@ spec:
     metadata:
       labels:
         app: nodejs-app
-  spec:
-    containers:
-      - image: CONTAINER_IMAGE
-        name: nodejs-container
-        ports:
-          - containerPort: 3000
+    spec:
+      containers:
+        - name: nodejs-container
+          image: CONTAINER_IMAGE
+          ports:
+            - containerPort: 3000
 
 ---
 
@@ -34,5 +34,4 @@ spec:
       port: 80
       targetPort: 3000
   type: LoadBalancer
-
 
