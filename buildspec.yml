@@ -9,9 +9,9 @@ phases:
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x kubectl
     - mv ./kubectl /usr/local/bin/kubectl
-    # - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-    # - chmod 700 get_helm.sh
-    # - ./get_helm.sh
+    - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+    - chmod 700 get_helm.sh
+    - ./get_helm.sh
        
   pre_build:
     commands:
@@ -31,11 +31,12 @@ phases:
     commands:
     - echo Build completed on `date`
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
-    - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' deployment.yml
-    - kubectl apply -f deployment.yml
+    #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' deployment.yml
+    - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' https://github.com/ccjacobs14/helm-project/blob/4b2031dacbb854544d1453353cbc7a37bdea77d2/myawesomeapp14/values.yaml
+    #- kubectl apply -f deployment.yml
     #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' /helm-project/myawesomeapp14/values.yaml
     #- helm install myawesomeapp14-r1 myawesomeapp14
-    #- helm upgrade -i myawesomeapp14-r1 myawesomeapp14 -f helm-project/myawesomeapp14/values.yaml --set image.tag=698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
+    - helm upgrade -i myawesomeapp14-r1 myawesomeapp14 -f https://github.com/ccjacobs14/helm-project/tree/4b2031dacbb854544d1453353cbc7a37bdea77d2/myawesomeapp14 #--set image.tag=698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
 #     - printf '[{"name":"deployment.yml","imageUri":"%s"}]' 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH > build.json
 # artifacts:
 #   files:
