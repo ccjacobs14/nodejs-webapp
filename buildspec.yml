@@ -31,12 +31,13 @@ phases:
     commands:
     - echo Build completed on `date`
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
+    - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:latest
     #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' deployment.yml
-    - sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' "**/myawesomeapp14/values.yaml"
+    #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' "**/myawesomeapp14/values.yaml"
     #- kubectl apply -f deployment.yml
     #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' /helm-project/myawesomeapp14/values.yaml
     #- helm install myawesomeapp14-r1 myawesomeapp14
-    - helm upgrade -i myawesomeapp14-r1 myawesomeapp14 -f "**/myawesomeapp14" #--set image.tag=698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
+    #- helm upgrade -i myawesomeapp14-r1 myawesomeapp14 -f "**/myawesomeapp14" #--set image.tag=698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
 #     - printf '[{"name":"deployment.yml","imageUri":"%s"}]' 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH > build.json
 # artifacts:
 #   files:
