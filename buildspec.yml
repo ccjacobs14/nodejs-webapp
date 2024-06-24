@@ -23,14 +23,14 @@ phases:
     commands:
     - echo Build started on `date`
     - echo Building the Docker image...
-    - docker build -t 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION .
-    - docker tag 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
+    - docker build -t 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:latest .
+    - docker tag 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:latest 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
 
   post_build:
     commands:
     - echo Build completed on `date`. Pushing to ECR
     - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH
-    - docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$CODEBUILD_RESOLVED_SOURCE_VERSION
+    #- docker push 698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:latest
     #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' deployment.yml
     #- sed -i 's@CONTAINER_IMAGE@'"698276559677.dkr.ecr.us-east-1.amazonaws.com/nodejs-webapp:$COMMIT_HASH"'@' "**/myawesomeapp14/values.yaml"
     #- kubectl apply -f deployment.yml
